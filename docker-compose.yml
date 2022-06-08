@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  ff:
+    image: ff:latest
+    build: ./ff
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    secrets:
+      - xauth_list
+
+secrets:
+  xauth_list:
+    file: ./xauth_list

@@ -1,0 +1,1 @@
+xauth nlist > xauth_list
