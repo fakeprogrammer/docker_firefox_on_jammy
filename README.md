@@ -11,6 +11,6 @@ Note: I've modified some files on a Windows PC after testing on Ubuntu; this mig
 2. Run with `docker compose up -d`. This will launch a Firefox window on the host.
 
 ### Possible improvements
-* The Mozilla PPA repo is added with `apt-add-repository`, which is quite a large addition to the image with all its dependencies. This step could be replaced with a 2-tier Dockerfile that only copies the resulting files. Overall, however, for the purposes of demonstration, I did not bother with more than minimal optimisation.
+* The Mozilla PPA repo is added with `apt-add-repository`, which is quite a large addition to the image with all its dependencies. This step could be replaced with a 2-tier Dockerfile that only copies the resulting files. Thanks to Firefox, the resulting image is large, anyway (~500 MB). For the purposes of demonstration, I did not bother with more than minimal optimisation.
 * VNC instead of connecting to X on host
 * etc
