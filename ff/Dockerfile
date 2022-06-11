@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Update system
-RUN DEBIAN_NONINTERACTIVE=1 \
+RUN DEBIAN_FRONTEND=noninteractive \
     apt update && \
     apt dist-upgrade -y && \
     apt autoclean -y && \
@@ -10,7 +10,7 @@ RUN DEBIAN_NONINTERACTIVE=1 \
 
 # Add Firefox repository and set package preference
 # add-apt-repository step fails if installed with --no-install-recommends
-RUN DEBIAN_NONINTERACTIVE=1 \
+RUN DEBIAN_FRONTEND=noninteractive \
     apt update && \
     apt install -y software-properties-common && \
     add-apt-repository -y ppa:mozillateam/ppa && \
