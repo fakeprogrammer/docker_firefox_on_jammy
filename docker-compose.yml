@@ -2,12 +2,20 @@ version: "3"
 
 services:
   ff:
-    image: ff:latest
+    image: ubuntu2204/firefox:latest
     build: ./ff
     environment:
       - DISPLAY=${DISPLAY}
+      - XMODIFIERS
+      - GTK_IM_MODULE
+      - QT_IM_MODULE
+      - DefalutIMModule=fcitx
+      - DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${XAUTHORITY}:/root/.Xauthority
+      - /run/user/1000/bus:/run/user/1000/bus
+      - /media/skaribe/ssd500-2/work/vmvol/backup_0826/:/home/user/work/vmvol
     network_mode: host
     secrets:
       - xauth_list

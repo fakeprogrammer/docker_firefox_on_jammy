@@ -1,5 +1,25 @@
 FROM ubuntu:22.04
 
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV LANG ja_JP.UTF-8
+
+ARG UID=1000 # ホストのユーザーIDと一致させる
+RUN sed -i.org -e 's|ports.ubuntu.com|jp.archive.ubuntu.com|g' /etc/apt/sources.list \
+    && apt-get update && apt-get install -y \
+    tzdata \
+    locales \
+    fonts-noto-cjk \
+    dbus-x11 \
+    pulseaudio \
+    fcitx-mozc \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s -f /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && dpkg-reconfigure tzdata \
+    && locale-gen ja_JP.UTF-8 \
+    && useradd -m -u ${UID} user
+
 # Update system
 RUN DEBIAN_FRONTEND=noninteractive \
     apt update && \
@@ -31,3 +51,4 @@ RUN apt update && \
 
 # Authenticate to display and run FF
 CMD xauth nmerge /run/secrets/xauth_list && /usr/bin/firefox
+# CMD xauth nmerge /run/secrets/xauth_list
